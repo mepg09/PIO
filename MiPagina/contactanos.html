@@ -1,0 +1,75 @@
+<div>
+    <div class="container mt-20">
+        <div class="text-center mb-20">
+            <h1 class="cactufe">¡Contáctanos!</h1>
+            <p>Si deseas, regístrate para que podamos contactarte.</p>
+        </div>
+        <form id="contactForm" class="needs-validation" novalidate data-parsley-validate>
+            <!-- Nombre -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" 
+                       required 
+                       pattern="[A-Za-zÀ-ÿ\s]+"
+                       data-parsley-pattern="[A-Za-zÀ-ÿ\s]+" 
+                       data-parsley-required-message="El nombre es obligatorio." 
+                       data-parsley-pattern-message="El nombre solo debe contener letras y espacios.">
+            </div>
+
+            <!-- Correo Electrónico -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" 
+                       required 
+                       data-parsley-type="email" 
+                       data-parsley-required-message="El correo electrónico es obligatorio." 
+                       data-parsley-type-message="Ingresa un correo electrónico válido.">
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mb-3">
+                <label for="phone" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="phone" name="phone" 
+                       required 
+                       pattern="\d{10}" 
+                       data-parsley-pattern="\d{10}" 
+                       data-parsley-required-message="El número telefónico es obligatorio." 
+                       data-parsley-pattern-message="El teléfono debe contener exactamente 10 dígitos.">
+            </div>
+
+            <!-- Botón de Registro -->
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+        <div id="message" class="text-center mt-4" style="display: none;">
+            <p><strong>Tus datos fueron guardados.</strong></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('contactForm');
+
+        if (form) {
+            // Inicializar Parsley
+            const parsleyForm = $('#contactForm').parsley();
+
+            // Manejar el evento de envío del formulario
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevenir el envío por defecto
+
+                // Validar el formulario con Parsley
+                if (parsleyForm.isValid()) {
+                    alert('Formulario enviado correctamente.');
+                    
+                    // Mostrar un mensaje y resetear el formulario
+                    document.getElementById('message').style.display = 'block';
+                    form.reset();
+                    parsleyForm.reset(); // Reiniciar el estado de Parsley
+                } else {
+                    alert('Por favor, corrige los errores en el formulario.');
+                }
+            });
+        }
+    });
+</script>
